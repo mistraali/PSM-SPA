@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Mini SPA – zadanie</title>
-  https://unpkg.com/vue@3/dist/vue.global.js
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
 
@@ -15,19 +15,23 @@
       Strona główna
     </button>
 
-    <button @click="currentView = ________">
+    <button @click="currentView = 'users-view'">
       Użytkownicy
     </button>
 
-    <button @click="________ = 'about-view'">
+    <button @click="currentView = 'about-view'">
       O aplikacji
+    </button>
+    <button @click="currentView = 'stats-view'">
+      Statystyki
     </button>
   </nav>
 
   <!-- AKTUALNY WIDOK -->
   <component
-    :is="________"
-    :users="users">
+    :is="currentView"
+    :users="users"
+    :view-name="currentView">
   </component>
 
 </div>
@@ -43,12 +47,12 @@ const HomeView = {
 };
 
 const UsersView = {
-  props: [________],
+  props: ['users'],
   template: `
     <section>
       <h2>Użytkownicy</h2>
       <ul>
-        <li v-for="user in ________" :key="user.id">
+        <li v-for="user in users" :key="user.id">
           {{ user.name }}
         </li>
       </ul>
@@ -64,24 +68,33 @@ const AboutView = {
     </section>
   `
 };
-
+const StatsView = {
+  props: ['users', 'viewName'],
+  template: `
+    <section>
+      <h2>Statystyki</h2>
+      <p><strong>Liczba użytkowników:</strong> {{ users.length }}</p>
+      <p><strong>Aktualnie wybrany widok:</strong> {{ viewName }}</p>
+    </section>
+  `
+};
 Vue.createApp({
   components: {
     'home-view': HomeView,
-    'users-view': ________,
-    'about-view': AboutView
+    'users-view': UsersView,
+    'about-view': AboutView,
+    'stats-view': StatsView
   },
   data() {
     return {
-      ________: 'home-view',
+      currentView: 'home-view',
       users: [
         { id: 1, name: 'Jan Kowalski' },
-        { id: 2, name: 'Anna Nowak' }
+        { id: 2, name: 'Anna Nowak' },
       ]
     };
   }
-}).mount('#____');
+}).mount('#app');
 </script>
-
 </body>
 </html>
