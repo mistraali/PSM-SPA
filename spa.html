@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini SPA – zadanie</title>
+  https://unpkg.com/vue@3/dist/vue.global.js
+</head>
+<body>
+
+<div id="app">
+
+  <!-- MENU NAWIGACYJNE -->
+  <nav>
+    <button @click="currentView = 'home-view'">
+      Strona główna
+    </button>
+
+    <button @click="currentView = ________">
+      Użytkownicy
+    </button>
+
+    <button @click="________ = 'about-view'">
+      O aplikacji
+    </button>
+  </nav>
+
+  <!-- AKTUALNY WIDOK -->
+  <component
+    :is="________"
+    :users="users">
+  </component>
+
+</div>
+
+<script>
+const HomeView = {
+  template: `
+    <section>
+      <h2>Strona główna</h2>
+      <p>Witamy w aplikacji SPA.</p>
+    </section>
+  `
+};
+
+const UsersView = {
+  props: [________],
+  template: `
+    <section>
+      <h2>Użytkownicy</h2>
+      <ul>
+        <li v-for="user in ________" :key="user.id">
+          {{ user.name }}
+        </li>
+      </ul>
+    </section>
+  `
+};
+
+const AboutView = {
+  template: `
+    <section>
+      <h2>O aplikacji</h2>
+      <p>Aplikacja SPA w Vue.js bez routera.</p>
+    </section>
+  `
+};
+
+Vue.createApp({
+  components: {
+    'home-view': HomeView,
+    'users-view': ________,
+    'about-view': AboutView
+  },
+  data() {
+    return {
+      ________: 'home-view',
+      users: [
+        { id: 1, name: 'Jan Kowalski' },
+        { id: 2, name: 'Anna Nowak' }
+      ]
+    };
+  }
+}).mount('#____');
+</script>
+
+</body>
+</html>

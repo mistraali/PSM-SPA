@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <h1>Test Vue</h1>
+    <div id="app">
+        <h3>Interpolacja</h3>
+        <p>{{name}}</p>
+        
+        <h3>Renderowanie listy</h3>
+        <button @click="newsub()">Przedmioty</button>
+        <ol>
+            <li v-for="s in subjects">
+                {{s.name}}, {{s.grade}}
+            </li>
+        </ol>
+
+        <h3>Obsługa zdarzeń</h3>
+        <button @click="display = !display">Pokaż</button>
+        <div v-if="display">
+            <p>Kierunek: {{program}}</p>
+        </div>
+
+        <h3>Wiązanie dwukierunkowe</h3>
+        <input type="text" v-model="name">
+    </div>
+
+    <!-- Import app -->
+    <script src="main.js"></script>
+    <!-- Mount app -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+</html>
